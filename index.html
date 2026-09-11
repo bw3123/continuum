@@ -311,8 +311,10 @@ if(now < new Date('2026-09-12T00:00:00')){
   message=LETTERS[0];
 }else if(now < new Date('2026-09-12T18:30:00')){
   message=LETTERS[1];
-}else{
+}else if(now < new Date('2026-09-13T00:00:00')){
   message=LETTERS[2];
+}else{
+  message=LETTERS.join('');
 }
 
 body.innerHTML=message+'<div class="sig"><span class="star">✦</span><p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
