@@ -302,8 +302,21 @@ var LETTERS=[
   btn.addEventListener('click',function(){
     var open=wrap.classList.contains('open');
     if(!open){
-      body.innerHTML=LETTERS[Math.floor(Math.random()*LETTERS.length)]+'<div class="sig"><span class="star">✦</span><p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
-      wrap.classList.add('open');btn.setAttribute('aria-expanded','true');btn.textContent='— close the message —';
+      var now=new Date();
+var message;
+
+if(now < new Date('2026-09-12T00:00:00')){
+  message='';
+}else if(now < new Date('2026-09-12T12:00:00')){
+  message=LETTERS[0];
+}else if(now < new Date('2026-09-12T18:30:00')){
+  message=LETTERS[1];
+}else{
+  message=LETTERS[2];
+}
+
+body.innerHTML=message+'<div class="sig"><span class="star">✦</span><p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
+   wrap.classList.add('open');btn.setAttribute('aria-expanded','true');btn.textContent='— close the message —';
     }else{
       /* keep the button in view so closing never yanks the page */
       var top=btn.getBoundingClientRect().top;
