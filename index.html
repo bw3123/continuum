@@ -274,7 +274,7 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
 
 /* ---------- ticker + clock ---------- */
 (function(){
-  var items=['E = mc²','F = G·m₁m₂ / r²','Δt = Δt₀ / √(1 − v²/c²)','ψ(x,t) = A·e^{i(kx−ωt)}','λ = h / p','S = k·log W','∮ E·dA = q/ε₀','lim(us → ∞) = ∞'];
+  var items=['lim(us → ∞) = ∞','E = mc²','F = G·m₁m₂ / r²','Δt = Δt₀ / √(1 − v²/c²)','ψ(x,t) = A·e^{i(kx−ωt)}','λ = h / p','S = k·log W','∮ E·dA = q/ε₀'];
   var row='';for(var k=0;k<2;k++){for(var i=0;i<items.length;i++)row+='<span>'+items[i]+'</span>';}
   document.getElementById('tick').innerHTML=row;
   var t0=new Date('2026-09-12T18:30:00');
