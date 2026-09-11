@@ -290,6 +290,7 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
 })();
 
 /* ---------- the letter ---------- */
+/* ---------- the letter ---------- */
 var LETTERS=[
 "<p class=\"eq\">// TRANSMISSION 001 · SOURCE: HOME</p><p>They taught us that gravity is not a pull but a curve — that mass simply tells space how to bend, and everything else obediently falls along the line. For years I believed I was walking straight. Then I met you, and every path I had ever measured turned out to be a slow, beautiful arc leaning toward one point.</p><p>I have tried to write this letter as a scientist would: define the variables, isolate the cause, report the findings without sentiment. But the data refuses to behave. The heart rate rises before the door opens. The memory of your voice survives longer than the sound. Something in me keeps returning a result the equations were never built to hold.</p><p>So let me report it plainly. In every experiment I have run — every ordinary Tuesday, every long silence, every argument we survived and laughed about a week later — the outcome is identical. You are the constant. Everything else is a variable I can live without.</p><p class=\"arp\">أنتِ الثابت الوحيد في كل معادلاتي، وكل ما عداكِ مجرد متغيّر أستطيع العيش بدونه.</p><p>On the twelfth of September I am not opening a chapter. I am closing a distance. And distance, as the physicists insist, was only ever a matter of how much space stood between two things that wanted to be one.</p><p class=\"eq\">// END OF TRANSMISSION · STATUS: ONGOING</p>",
 
@@ -297,76 +298,80 @@ var LETTERS=[
 
 "<p class=\"eq\">// TRANSMISSION 003 · ON TIME AND ITS FAILURES</p><p>Relativity says time is not a river running at one speed for everyone. It stretches. It bends around mass. It slows for whoever is moving fast, and it slips for whoever is waiting. I have lived both sides of that equation this year: hours with you that collapsed into minutes, and minutes without you that refused to end.</p><p>The second law of thermodynamics promises that everything drifts toward disorder — that rooms get messy, that stars burn out, that all systems left alone fall apart. But it also hides a loophole: order can be built anywhere, so long as something keeps pouring energy in. That is what we have been doing. Quietly. Daily. Building a small pocket of order in a universe that was never obligated to give us one.</p><p>So this is my promise, written in the only language I fully trust. I will keep pouring in. Through the ordinary mornings and the difficult months, through whatever the years arrive carrying. Not because it is easy, but because entropy is the only thing I have ever wanted to argue with.</p><p class=\"arp\">سأظل أختاركِ كل يوم، لا لأن الأمر سهل، بل لأنكِ الشيء الوحيد الذي يستحق كل هذا الجهد.</p><p>The twelfth of September is not a finish line. It is the moment the experiment stops being theoretical.</p><p class=\"eq\">// TO BE CONTINUED · 9 / 10 / 2026</p>"
 ];
+
 (function(){
-  var btn=document.getElementById('openBtn'),wrap=document.getElementById('letter'),body=document.getElementById('letterBody');
+  var btn=document.getElementById('openBtn');
+  var wrap=document.getElementById('letter');
+  var body=document.getElementById('letterBody');
+
   btn.addEventListener('click',function(){
+
     var open=wrap.classList.contains('open');
+
     if(!open){
-  var now = new Date();
-  var target = new Date('2026-09-12T00:00:00');
-  var end = new Date('2026-09-13T00:00:00');
 
-  if (now < target) {
+      var now = new Date();
+      var target = new Date('2026-09-12T00:00:00');
+      var end = new Date('2026-09-13T00:00:00');
 
-    body.innerHTML =
-      '<p class="eq">// TRANSMISSION SEALED · OPENS 12 / 09 / 2026</p>' +
-      '<p>The message is still sealed. Come back when the day begins.</p>';
+      if(now < target){
 
-  } else if (now >= end) {
+        body.innerHTML =
+          '<p class="eq">// TRANSMISSION SEALED · OPENS 12 / 09 / 2026</p>' +
+          '<p>The message is still sealed. Come back when the day begins.</p>';
 
-    body.innerHTML =
-      LETTERS.join('') +
-      '<div class="sig"><span class="star">✦</span>' +
-      '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
+      }else if(now >= end){
 
-  } else {
+        body.innerHTML =
+          LETTERS.join('') +
+          '<div class="sig">' +
+          '<span class="star">✦</span>' +
+          '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p>' +
+          '</div>';
 
-    var h = now.getHours();
-    var m = now.getMinutes();
-    var minutes = h * 60 + m;
+      }else{
 
-    var messageIndex;
+        var h=now.getHours();
+        var m=now.getMinutes();
+        var minutes=h*60+m;
 
-    if (minutes < 720) {
-      messageIndex = 0;       // 00:00–12:00 → Message 1
-    } else if (minutes < 1110) {
-      messageIndex = 1;       // 12:00–18:30 → Message 2
-    } else {
-      messageIndex = 2;       // 18:30–24:00 → Message 3
-    }
+        var messageIndex;
 
-    body.innerHTML =
-      LETTERS[messageIndex] +
-      '<div class="sig"><span class="star">✦</span>' +
-      '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
-  }
+        if(minutes < 720){
+          messageIndex=0;
+        }else if(minutes < 1110){
+          messageIndex=1;
+        }else{
+          messageIndex=2;
+        }
 
-  wrap.classList.add('open');
-  btn.setAttribute('aria-expanded','true');
-  btn.textContent='— close the message —';
+        body.innerHTML =
+          LETTERS[messageIndex] +
+          '<div class="sig">' +
+          '<span class="star">✦</span>' +
+          '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p>' +
+          '</div>';
+      }
 
-}else{
-  /* keep the button in view so closing never yanks the page */
-  var top=btn.getBoundingClientRect().top;
+      wrap.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      btn.textContent='— close the message —';
 
-  wrap.classList.remove('open');
-  btn.setAttribute('aria-expanded','false');
-  btn.textContent='— open the message —';
+    }else{
 
-  requestAnimationFrame(function(){
-    var diff=btn.getBoundingClientRect().top-top;
-    if(Math.abs(diff)>1)scrollBy(0,diff);
-  });
-}
-else{
       /* keep the button in view so closing never yanks the page */
       var top=btn.getBoundingClientRect().top;
-      wrap.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='— open the message —';
+
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.textContent='— open the message —';
+
       requestAnimationFrame(function(){
         var diff=btn.getBoundingClientRect().top-top;
         if(Math.abs(diff)>1)scrollBy(0,diff);
       });
     }
+
   });
 })();
 
