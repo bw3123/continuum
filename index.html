@@ -277,7 +277,7 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
   var items=['E = mc²','F = G·m₁m₂ / r²','Δt = Δt₀ / √(1 − v²/c²)','ψ(x,t) = A·e^{i(kx−ωt)}','λ = h / p','S = k·log W','∮ E·dA = q/ε₀','lim(us → ∞) = ∞'];
   var row='';for(var k=0;k<2;k++){for(var i=0;i<items.length;i++)row+='<span>'+items[i]+'</span>';}
   document.getElementById('tick').innerHTML=row;
-  var t0=new Date('2026-09-12T00:00:00');
+  var t0=new Date('2026-09-12T18:30:00');
   function tick(){var ms=t0-new Date();if(ms<0)ms=0;var dd=Math.floor(ms/864e5),hh=Math.floor(ms/36e5)%24,mm=Math.floor(ms/6e4)%60,ss=Math.floor(ms/1e3)%60;
     document.getElementById('clock').textContent='T− '+dd+'d '+('0'+hh).slice(-2)+':'+('0'+mm).slice(-2)+':'+('0'+ss).slice(-2);}
   tick();setInterval(tick,1000);
