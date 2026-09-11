@@ -317,6 +317,7 @@ var LETTERS=[
 })();
 
 /* ---------- daily message ---------- */
+/* ---------- daily message ---------- */
 (function(){
   var messages=[
     "Today the light reaching us from a distant star may have left before we were born, yet it still arrives. Some things travel a very long way simply because they were meant to find you.",
@@ -330,17 +331,57 @@ var LETTERS=[
     "Dark matter cannot be seen, yet it holds galaxies together. I am convinced something similar exists between us: invisible, unprovable, and absolutely necessary.",
     "A black hole bends light so strongly that even photons orbit it. I understand them now. I would orbit you forever and call it freedom."
   ];
-  var start=new Date('2026-09-10T00:00:00');
-  var end=new Date('2026-10-10T00:00:00');
-  var now=new Date();
-  var dayMs=864e5;
-  var dayNum=Math.floor((now-start)/dayMs)+1;
-  var msg;
-  if(now>=end) msg="The final message has arrived. The story continues in person.";
-  else msg=messages[((dayNum-1)%messages.length+messages.length)%messages.length];
-  document.getElementById('dailyBody').innerHTML=msg;
-  document.getElementById('dailyDate').textContent='DAY '+('00'+dayNum).slice(-3)+' · '+now.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
+
+  // Daily messages begin on September 12, 2026
+  var start = new Date('2026-09-12T00:00:00');
+
+  // Final daily message is available until October 9, 2026
+  var end = new Date('2026-10-10T00:00:00');
+
+  var now = new Date();
+  var dayMs = 86400000;
+
+  var dailyBody = document.getElementById('dailyBody');
+  var dailyDate = document.getElementById('dailyDate');
+
+  if(now < start){
+
+    dailyBody.textContent =
+      'The first message will arrive on 12 / 09 / 2026.';
+
+    dailyDate.textContent =
+      'SEALED · 12 / 09 / 2026';
+
+  }else if(now >= end){
+
+    dailyBody.textContent =
+      'The final message has arrived. The story continues in person.';
+
+    dailyDate.textContent =
+      'FINAL · 09 / 10 / 2026';
+
+  }else{
+
+    var dayNum = Math.floor((now - start) / dayMs) + 1;
+
+    var message =
+      messages[(dayNum - 1) % messages.length];
+
+    dailyBody.textContent = message;
+
+    dailyDate.textContent =
+      'DAY ' +
+      ('00' + dayNum).slice(-3) +
+      ' · ' +
+      now.toLocaleDateString('en-GB',{
+        day:'2-digit',
+        month:'2-digit',
+        year:'numeric'
+      });
+  }
+
 })();
+
 </script>
 </body>
 </html>
