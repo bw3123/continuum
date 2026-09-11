@@ -224,7 +224,7 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
       <p class="dailybody" id="dailyBody">—</p>
       <div class="dailyfoot">
         <span class="dailydate mono" id="dailyDate">—</span>
-        <span class="dailynext">new message everyday from 12 / 09 / 2026 until 9 / 10 / 2026</span>
+        <span class="dailynext">new message everyday until 9 / 10 / 2026</span>
       </div>
     </div>
   </section>
@@ -277,7 +277,7 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
   var items=['E = mc²','F = G·m₁m₂ / r²','Δt = Δt₀ / √(1 − v²/c²)','ψ(x,t) = A·e^{i(kx−ωt)}','λ = h / p','S = k·log W','∮ E·dA = q/ε₀','lim(us → ∞) = ∞'];
   var row='';for(var k=0;k<2;k++){for(var i=0;i<items.length;i++)row+='<span>'+items[i]+'</span>';}
   document.getElementById('tick').innerHTML=row;
-  var t0=new Date('2026-09-12T18:30:00');
+  var t0=new Date('2026-09-12T00:00:00');
   function tick(){var ms=t0-new Date();if(ms<0)ms=0;var dd=Math.floor(ms/864e5),hh=Math.floor(ms/36e5)%24,mm=Math.floor(ms/6e4)%60,ss=Math.floor(ms/1e3)%60;
     document.getElementById('clock').textContent='T− '+dd+'d '+('0'+hh).slice(-2)+':'+('0'+mm).slice(-2)+':'+('0'+ss).slice(-2);}
   tick();setInterval(tick,1000);
@@ -290,7 +290,6 @@ h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;b
 })();
 
 /* ---------- the letter ---------- */
-/* ---------- the letter ---------- */
 var LETTERS=[
 "<p class=\"eq\">// TRANSMISSION 001 · SOURCE: HOME</p><p>They taught us that gravity is not a pull but a curve — that mass simply tells space how to bend, and everything else obediently falls along the line. For years I believed I was walking straight. Then I met you, and every path I had ever measured turned out to be a slow, beautiful arc leaning toward one point.</p><p>I have tried to write this letter as a scientist would: define the variables, isolate the cause, report the findings without sentiment. But the data refuses to behave. The heart rate rises before the door opens. The memory of your voice survives longer than the sound. Something in me keeps returning a result the equations were never built to hold.</p><p>So let me report it plainly. In every experiment I have run — every ordinary Tuesday, every long silence, every argument we survived and laughed about a week later — the outcome is identical. You are the constant. Everything else is a variable I can live without.</p><p class=\"arp\">أنتِ الثابت الوحيد في كل معادلاتي، وكل ما عداكِ مجرد متغيّر أستطيع العيش بدونه.</p><p>On the twelfth of September I am not opening a chapter. I am closing a distance. And distance, as the physicists insist, was only ever a matter of how much space stood between two things that wanted to be one.</p><p class=\"eq\">// END OF TRANSMISSION · STATUS: ONGOING</p>",
 
@@ -298,80 +297,22 @@ var LETTERS=[
 
 "<p class=\"eq\">// TRANSMISSION 003 · ON TIME AND ITS FAILURES</p><p>Relativity says time is not a river running at one speed for everyone. It stretches. It bends around mass. It slows for whoever is moving fast, and it slips for whoever is waiting. I have lived both sides of that equation this year: hours with you that collapsed into minutes, and minutes without you that refused to end.</p><p>The second law of thermodynamics promises that everything drifts toward disorder — that rooms get messy, that stars burn out, that all systems left alone fall apart. But it also hides a loophole: order can be built anywhere, so long as something keeps pouring energy in. That is what we have been doing. Quietly. Daily. Building a small pocket of order in a universe that was never obligated to give us one.</p><p>So this is my promise, written in the only language I fully trust. I will keep pouring in. Through the ordinary mornings and the difficult months, through whatever the years arrive carrying. Not because it is easy, but because entropy is the only thing I have ever wanted to argue with.</p><p class=\"arp\">سأظل أختاركِ كل يوم، لا لأن الأمر سهل، بل لأنكِ الشيء الوحيد الذي يستحق كل هذا الجهد.</p><p>The twelfth of September is not a finish line. It is the moment the experiment stops being theoretical.</p><p class=\"eq\">// TO BE CONTINUED · 9 / 10 / 2026</p>"
 ];
-
 (function(){
-  var btn=document.getElementById('openBtn');
-  var wrap=document.getElementById('letter');
-  var body=document.getElementById('letterBody');
-
+  var btn=document.getElementById('openBtn'),wrap=document.getElementById('letter'),body=document.getElementById('letterBody');
   btn.addEventListener('click',function(){
-
     var open=wrap.classList.contains('open');
-
     if(!open){
-
-      var now = new Date();
-      var target = new Date('2026-09-12T00:00:00');
-      var end = new Date('2026-09-13T00:00:00');
-
-      if(now < target){
-
-        body.innerHTML =
-          '<p class="eq">// TRANSMISSION SEALED · OPENS 12 / 09 / 2026</p>' +
-          '<p>The message is still sealed. Come back when the day begins.</p>';
-
-      }else if(now >= end){
-
-        body.innerHTML =
-          LETTERS.join('') +
-          '<div class="sig">' +
-          '<span class="star">✦</span>' +
-          '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p>' +
-          '</div>';
-
-      }else{
-
-        var h=now.getHours();
-        var m=now.getMinutes();
-        var minutes=h*60+m;
-
-        var messageIndex;
-
-        if(minutes < 720){
-          messageIndex=0;
-        }else if(minutes < 1110){
-          messageIndex=1;
-        }else{
-          messageIndex=2;
-        }
-
-        body.innerHTML =
-          LETTERS[messageIndex] +
-          '<div class="sig">' +
-          '<span class="star">✦</span>' +
-          '<p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p>' +
-          '</div>';
-      }
-
-      wrap.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
-      btn.textContent='— close the message —';
-
+      body.innerHTML=LETTERS[Math.floor(Math.random()*LETTERS.length)]+'<div class="sig"><span class="star">✦</span><p class="small" style="margin-top:12px">Sealed with love · 12 / 09 / 2026</p></div>';
+      wrap.classList.add('open');btn.setAttribute('aria-expanded','true');btn.textContent='— close the message —';
     }else{
-
       /* keep the button in view so closing never yanks the page */
       var top=btn.getBoundingClientRect().top;
-
-      wrap.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      btn.textContent='— open the message —';
-
+      wrap.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='— open the message —';
       requestAnimationFrame(function(){
         var diff=btn.getBoundingClientRect().top-top;
         if(Math.abs(diff)>1)scrollBy(0,diff);
       });
     }
-
   });
 })();
 
@@ -389,39 +330,16 @@ var LETTERS=[
     "Dark matter cannot be seen, yet it holds galaxies together. I am convinced something similar exists between us: invisible, unprovable, and absolutely necessary.",
     "A black hole bends light so strongly that even photons orbit it. I understand them now. I would orbit you forever and call it freedom."
   ];
-  var start=new Date('2026-09-12T00:00:00');
+  var start=new Date('2026-09-10T00:00:00');
   var end=new Date('2026-10-10T00:00:00');
   var now=new Date();
-var dayMs=864e5;
-
-if(now < start){
-
-  document.getElementById('dailyBody').innerHTML =
-    'The first message will arrive on 12 / 09 / 2026.';
-
-  document.getElementById('dailyDate').textContent =
-    'SEALED · 12 / 09 / 2026';
-
-}else{
-
+  var dayMs=864e5;
   var dayNum=Math.floor((now-start)/dayMs)+1;
   var msg;
-
-  if(now>=end)
-    msg="The final message has arrived. The story continues in person.";
-  else
-    msg=messages[((dayNum-1)%messages.length+messages.length)%messages.length];
-
+  if(now>=end) msg="The final message has arrived. The story continues in person.";
+  else msg=messages[((dayNum-1)%messages.length+messages.length)%messages.length];
   document.getElementById('dailyBody').innerHTML=msg;
-
-  document.getElementById('dailyDate').textContent =
-    'DAY '+('00'+dayNum).slice(-3)+' · '+
-    now.toLocaleDateString('en-GB',{
-      day:'2-digit',
-      month:'2-digit',
-      year:'numeric'
-    });
-}
+  document.getElementById('dailyDate').textContent='DAY '+('00'+dayNum).slice(-3)+' · '+now.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
 })();
 </script>
 </body>
